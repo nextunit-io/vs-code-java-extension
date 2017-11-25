@@ -1,0 +1,60 @@
+{
+    "name": "java-overview-extension",
+    "displayName": "Java Overview Extension",
+    "description": "This extension will use one folder for packages and supports other utils for VS Code with Java Support",
+    "version": "0.0.1",
+    "publisher": "nextunit-io",
+    "engines": {
+        "vscode": "^1.18.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:nextunit-java.config.add-source-dir",
+        "workspaceContains:**/.vscode/nextunit/java.json",
+        "onView:nextunit-java.view-provider"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "nextunit-java.config.add-source-dir",
+                "title": "nextunit JAVA: Add Source directory"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "nextunit-java.config.add-source-dir",
+                    "group": "nextunit-java@1",
+                    "when": "explorerResourceIsFolder"
+                }
+            ]
+        },
+        "views": {
+            "explorer": [
+                {
+                    "id": "nextunit-java.view-provider",
+                    "name": "Nextunit Java View"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "fs-extra": "^4.0.2"
+    }
+}
